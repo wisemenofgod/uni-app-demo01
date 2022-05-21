@@ -1,5 +1,10 @@
 <template>
   <view>
+
+    <my-search bgcolor="#ff0000" @click="gotoSearch"></my-search>
+
+
+
     <view class="scroll-view-container">
       <!-- 左侧的滚动视图区域 -->
       <scroll-view class="left-scroll-view" scroll-y :style="{height: wh + 'px'}">
@@ -58,13 +63,19 @@
         this.active = i
         this.cateLevel2 = this.cateList[i].children
         this.scrollTop = this.scrollTop === 0 ? 1 : 0
+      },
+
+      gotoSearch() {
+        uni.navigateTo({
+          url: '/subpkg/search/search'
+        })
       }
     },
     onLoad() {
       // 获取当前系统的信息
       const sysInfo = uni.getSystemInfoSync()
       // 为 wh 窗口可用高度动态赋值
-      this.wh = sysInfo.windowHeight
+      this.wh = sysInfo.windowHeight - 50
       this.getCateList()
 
     }
